@@ -1,0 +1,63 @@
+:root {
+    --headerBackground-color: #008ECE;
+    --mainBackground-color: #DAE0E6;
+}
+
+body {
+    margin: 0;
+    background-color: var(--mainBackground-color);
+    color: #1a1a1b;
+    font-family: 'Roboto', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    background-color: var(--headerBackground-color);
+}
+
+h1 {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+main > div {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 0 0;
+}
+
+form > input[type="search"] {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    width: 500px;
+}
+
+form > button {
+    padding: 5px;
+}
+
+.searchedProperties {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(325px, 400px));
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    box-shadow: 0 0 5px black;
+    overflow-wrap: break-word;
+    border-radius: 8px;
+    padding: 0 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
