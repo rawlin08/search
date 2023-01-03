@@ -1,11 +1,16 @@
 // DOM Selectors
 
-const formDetails = document.querySelector('form');
+const searchDetails = document.querySelector('.searching');
+const newDetails = document.querySelector('.add');
 const propertiesArea = document.querySelector('.searchedProperties');
+const newPropertyDialog = document.querySelector('.newProperty');
+const newPropertyBttn = document.querySelector('.addNew');
 
 // Events
 
-formDetails.addEventListener('submit', search);
+searchDetails.addEventListener('submit', search);
+newDetails.addEventListener('submit', addNewProperty);
+newPropertyBttn.addEventListener('click', openDialog);
 
 // search functions
 
@@ -25,9 +30,9 @@ function search(e) {
                         data.JavaScript.forEach(element => makeNewCard(element));
                     }
                     else {
-                        let searchedHTML = data.HTML.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
-                        let searchedCSS = data.CSS.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
-                        let searchedJS = data.JavaScript.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
+                        let searchedHTML = data.HTML.filter(element => element.property.toLowerCase().includes(searchedText) || element.description.toLowerCase().includes(searchedText));
+                        let searchedCSS = data.CSS.filter(element => element.property.toLowerCase().includes(searchedText) || element.description.toLowerCase().includes(searchedText));
+                        let searchedJS = data.JavaScript.filter(element => element.property.toLowerCase().includes(searchedText) || element.description.toLowerCase().includes(searchedText));
                         let searched = searchedHTML.concat(searchedCSS, searchedJS);
                         searched.forEach(element => makeNewCard(element));
                     }
@@ -42,7 +47,7 @@ function search(e) {
                         data.forEach(element => makeNewCard(element));
                     }
                     else {
-                        let searched = data.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
+                        let searched = data.filter(element => element.property.toLowerCase().includes(searchedText) || element.description.toLowerCase().includes(searchedText));
                         searched.forEach(element => makeNewCard(element));
                     }
                 })
@@ -55,13 +60,29 @@ function makeNewCard(element) {
     propertiesArea.innerHTML += 
     `
     <div class="card">
-        <h2>${element.property}</h2>
-        <p>Language: ${element.language}</p>
+        <a href="#" data-property class="property"><h2>${element.property}</h2></a>
+        <h3>Language: ${element.language}</h3>
         <p>${element.description}</p>
     </div>
     `;
+
+    let propertyID = document.querySelectorAll('[data-property]');
+    propertyID.forEach(href => {
+        href.addEventListener('click', () => {
+            test(href.textContent);
+        });
+    })
 }
 
-function addNewProperty() {
+function test(h) {
+    console.log(h);
+}
 
+function openDialog() {
+    newPropertyDialog.showModal();
+}
+
+function addNewProperty(e) {
+    e.preventDefault();
+    console.log('hello');
 }
