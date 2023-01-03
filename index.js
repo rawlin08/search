@@ -5,7 +5,7 @@ const propertiesArea = document.querySelector('.searchedProperties');
 
 // Events
 
-formDetails.addEventListener('submit', search)
+formDetails.addEventListener('submit', search);
 
 // search functions
 
@@ -25,9 +25,9 @@ function search(e) {
                         data.JavaScript.forEach(element => makeNewCard(element));
                     }
                     else {
-                        let searchedHTML = data.HTML.filter(element => element.property.includes(searchedText));
-                        let searchedCSS = data.CSS.filter(element => element.property.includes(searchedText));
-                        let searchedJS = data.JavaScript.filter(element => element.property.includes(searchedText));
+                        let searchedHTML = data.HTML.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
+                        let searchedCSS = data.CSS.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
+                        let searchedJS = data.JavaScript.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
                         let searched = searchedHTML.concat(searchedCSS, searchedJS);
                         searched.forEach(element => makeNewCard(element));
                     }
@@ -41,8 +41,10 @@ function search(e) {
                     if (searchedText == 'all') {
                         data.forEach(element => makeNewCard(element));
                     }
-                    let searched = data.filter(element => element.property.includes(searchedText));
-                    searched.forEach(element => makeNewCard(element));
+                    else {
+                        let searched = data.filter(element => element.property.includes(searchedText) || element.description.includes(searchedText));
+                        searched.forEach(element => makeNewCard(element));
+                    }
                 })
         }
         console.log('Search Done!');
@@ -58,4 +60,8 @@ function makeNewCard(element) {
         <p>${element.description}</p>
     </div>
     `;
+}
+
+function addNewProperty() {
+
 }
